@@ -43,9 +43,11 @@ func TestSonarSweep(t *testing.T) {
 	}
 
 	for _, tc := range cases {
-		observedResult, observedErr := SonarSweep(tc.given)
+		t.Run(tc.name, func(t *testing.T) {
+			observedResult, observedErr := SonarSweep(tc.given)
 
-		assert.Equal(t, tc.expectedResult, observedResult)
-		assert.True(t, errors.Is(observedErr, tc.expectedErr))
+			assert.Equal(t, tc.expectedResult, observedResult)
+			assert.True(t, errors.Is(observedErr, tc.expectedErr))
+		})
 	}
 }
