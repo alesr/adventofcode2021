@@ -1,4 +1,5 @@
-# adventofcode2021
+# adventofcode2021 [![codecov](https://codecov.io/gh/alesr/adventofcode2021/branch/master/graph/badge.svg?token=LYQJD4Z5RV)](https://codecov.io/gh/alesr/adventofcode2021)
+
 
 ## Commands
     
