@@ -3,43 +3,21 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 
 	"github.com/alesr/adventofcode2021/day1"
 	"github.com/alesr/adventofcode2021/day2"
+	"github.com/alesr/adventofcode2021/day3"
 )
 
 func main() {
-	day1P1Input := readFile("day1/data.in")
-	day1P2Input := *day1P1Input
-
-	day1P1Result, err := day1.Part1(day1P1Input)
-	if err != nil {
-		log.Fatalln("failed to process day 1 part 1:", err)
-	}
-	fmt.Println("Day 1 part 1:", day1P1Result)
-
-	day1P2Result, err := day1.Part2(&day1P2Input)
-	if err != nil {
-		log.Fatalln("failed to process day 1 part 2:", err)
-	}
-	fmt.Println("Day 1 part 2:", day1P2Result)
-
-	day2P1Input := readFile("day2/data.in")
-	day2P2Input := *day2P1Input
-
-	day2P1Result, err := day2.Part1(day2P1Input)
-	if err != nil {
-		log.Fatalln("failed to process day 2 part 1:", err)
-	}
-	fmt.Println("Day 2 part 1:", day2P1Result)
-
-	day2P2Result, err := day2.Part2(&day2P2Input)
-	if err != nil {
-		log.Fatalln("failed to process day 2 part 1:", err)
-	}
-	fmt.Println("Day 2 part 2:", day2P2Result)
+	run("Day 1 Part 1", "day1/data.in", day1.Part1)
+	run("Day 1 Part 2", "day1/data.in", day1.Part2)
+	run("Day 2 Part 1", "day2/data.in", day2.Part1)
+	run("Day 2 Part 2", "day2/data.in", day2.Part2)
+	run("Day 3 Part 1", "day3/data.in", day3.Part1)
 }
 
 func readFile(filename string) *bytes.Buffer {
@@ -48,4 +26,14 @@ func readFile(filename string) *bytes.Buffer {
 		log.Fatalf("failed to open '%s' data input file: %s\n", filename, err)
 	}
 	return bytes.NewBuffer(data)
+}
+
+func run(title, inputPath string, fn func(io.Reader) (int, error)) {
+	input := readFile(inputPath)
+
+	res, err := fn(input)
+	if err != nil {
+		log.Fatalln("could not execute function:", err)
+	}
+	fmt.Printf("%s: %d\n", title, res)
 }
