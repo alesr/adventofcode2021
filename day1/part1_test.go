@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSonarSweep(t *testing.T) {
+func TestPart1(t *testing.T) {
 	cases := []struct {
 		name           string
 		given          io.Reader
@@ -44,7 +44,7 @@ func TestSonarSweep(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			observedResult, observedErr := SonarSweep(tc.given)
+			observedResult, observedErr := Part1(tc.given)
 
 			assert.Equal(t, tc.expectedResult, observedResult)
 			assert.True(t, errors.Is(observedErr, tc.expectedErr))

@@ -1,19 +1,21 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
 	"log"
-	"os"
 
 	"github.com/alesr/adventofcode2021/day1"
 )
 
 func main() {
-	sonarDataInput, err := os.Open("day1/sonar_sweep_input.txt")
+	day1P1Input := readFile("day1/data.in")
+	day1P1Result, err := day1.Part1(day1P1Input)
 	if err != nil {
-		log.Fatalln("failed to open sonar data input file:", err)
+		log.Fatalln("failed to process day 1 part 1:", err)
 	}
-	defer closeFile(sonarDataInput)
+	fmt.Println("Day 1 part 1:", day1P1Result)
 
 	result, err := day1.SonarSweep(sonarDataInput)
 	if err != nil {
@@ -23,9 +25,10 @@ func main() {
 	fmt.Println("Sonar sweep result:", result)
 }
 
-func closeFile(f *os.File) {
-	err := f.Close()
+func readFile(filename string) *bytes.Buffer {
+	data, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalln("failed to close file:", err)
+		log.Fatalf("failed to open '%s' data input file: %s\n", filename, err)
 	}
+	return bytes.NewBuffer(data)
 }
