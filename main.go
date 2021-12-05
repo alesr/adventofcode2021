@@ -27,12 +27,19 @@ func main() {
 	fmt.Println("Day 1 part 2:", day1P2Result)
 
 	day2P1Input := readFile("day2/data.in")
+	day2P2Input := *day2P1Input
 
 	day2P1Result, err := day2.Part1(day2P1Input)
 	if err != nil {
 		log.Fatalln("failed to process day 2 part 1:", err)
 	}
 	fmt.Println("Day 2 part 1:", day2P1Result)
+
+	day2P2Result, err := day2.Part2(&day2P2Input)
+	if err != nil {
+		log.Fatalln("failed to process day 2 part 1:", err)
+	}
+	fmt.Println("Day 2 part 2:", day2P2Result)
 }
 
 func readFile(filename string) *bytes.Buffer {
