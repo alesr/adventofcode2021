@@ -13,7 +13,7 @@ var (
 	errInputNil     = fmt.Errorf("input is nil")
 )
 
-func SonarSweep(input io.Reader) (int, error) {
+func Part1(input io.Reader) (int, error) {
 	if input == nil {
 		return 0, errInputNil
 	}

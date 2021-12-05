@@ -1,4 +1,4 @@
-package day1
+package day2
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSonarSweep(t *testing.T) {
+func TestPart2(t *testing.T) {
 	cases := []struct {
 		name           string
 		given          io.Reader
@@ -18,8 +18,8 @@ func TestSonarSweep(t *testing.T) {
 	}{
 		{
 			name:           "with site example input",
-			given:          bytes.NewBufferString("199\n200\n208\n210\n200\n207\n240\n269\n260\n263"),
-			expectedResult: 7,
+			given:          bytes.NewBufferString("forward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2"),
+			expectedResult: 900,
 			expectedErr:    nil,
 		},
 		{
@@ -34,17 +34,11 @@ func TestSonarSweep(t *testing.T) {
 			expectedResult: 0,
 			expectedErr:    nil,
 		},
-		{
-			name:           "with non-numeric input",
-			given:          bytes.NewBufferString("199\n200\n208\n210\n200\n207\n240\n269\n260\n263\nabc"),
-			expectedResult: 0,
-			expectedErr:    errInputInvalid,
-		},
 	}
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			observedResult, observedErr := SonarSweep(tc.given)
+			observedResult, observedErr := Part2(tc.given)
 
 			assert.Equal(t, tc.expectedResult, observedResult)
 			assert.True(t, errors.Is(observedErr, tc.expectedErr))
