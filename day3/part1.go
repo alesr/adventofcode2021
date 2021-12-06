@@ -9,7 +9,8 @@ import (
 )
 
 var (
-	errInputNil = fmt.Errorf("input is nil")
+	errInputNil     = fmt.Errorf("input is nil")
+	errInputInvalid = fmt.Errorf("invalid input")
 )
 
 func Part1(input io.Reader) (int, error) {
@@ -63,12 +64,18 @@ func Part1(input io.Reader) (int, error) {
 
 	ε, err := strconv.ParseInt(leastCommon, 2, 64)
 	if err != nil {
-		return 0, fmt.Errorf("could not parse epsilon: %s", err)
+		return 0, fmt.Errorf(
+			"could not parse epsilon: %s - %w",
+			err, errInputInvalid,
+		)
 	}
 
 	γ, err := strconv.ParseInt(mostCommon, 2, 64)
 	if err != nil {
-		return 0, fmt.Errorf("could not parse gamma: %s", err)
+		return 0, fmt.Errorf(
+			"could not parse gamma: %s - %w",
+			err, errInputInvalid,
+		)
 	}
 
 	return int(ε * γ), nil
